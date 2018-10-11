@@ -22,7 +22,6 @@ public class Main extends Application {
     // TODO: - Selecting shapes with click
     // TODO: -
 
-
     // TODO: 3. File management
     // TODO: - Saving and loading SVG
     // TODO: - Saving and loading bitmap
@@ -43,7 +42,6 @@ public class Main extends Application {
         primaryStage.show();
 
     }
-
 
     public static void main(String[] args) {
         launch(args);
