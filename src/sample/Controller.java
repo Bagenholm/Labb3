@@ -29,12 +29,17 @@ public class Controller {
     @FXML
     Button clearButton;
 
+    String shapeType;
+
     public Controller() {
 
     }
 
     public void init() {
         draw();
+        ShapeFactory shapeFactory = new ShapeFactory();
+        Shape shapeCircle = shapeFactory.getShape(shapeType);
+        shapeCircle.draw();
     }
 
     public void draw() {
