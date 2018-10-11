@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    private Controller controller;
+
     // TODO: 1. GUI Interface design
     // TODO: - For shapes: buttons to choose shape, menu for color, input boxes for width and height
     // TODO: - Draw and select buttons
@@ -30,10 +32,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
+        Parent root = loader.load();
+
+        controller = loader.getController();
+        controller.init();
+
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 500, 500));
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
+
     }
 
 
