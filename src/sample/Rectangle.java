@@ -3,14 +3,14 @@ package sample;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Circle implements Shape {
+public class Rectangle implements Shape {
 
     double x, y;
     int width, height;
     Color color;
     GraphicsContext graphicsContext;
 
-    public Circle(GraphicsContext graphicsContext, double x, double y, int width, int height, Color color) {
+    public Rectangle(GraphicsContext graphicsContext, double x, double y, int width, int height, Color color) {
         this.graphicsContext = graphicsContext;
         this.x = x;
         this.y = y;
@@ -22,7 +22,8 @@ public class Circle implements Shape {
     @Override
     public void draw() {
         graphicsContext.setFill(color);
-        graphicsContext.fillOval(x, y, width, height);
+        graphicsContext.fillRect(x, y, width, height);
     }
+
 
 }
