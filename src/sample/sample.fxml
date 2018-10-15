@@ -39,14 +39,14 @@
         <items>
             <HBox id="boxDrawSelect" prefHeight="25.0" prefWidth="200.0">
                <children>
-                  <RadioButton id="drawRadio" fx:id="drawRadio" mnemonicParsing="false" selected="true" text="Draw">
+                  <RadioButton id="drawRadio" fx:id="drawRadio" mnemonicParsing="false" onAction="#drawRadioClicked" text="Draw">
                      <toggleGroup>
                         <ToggleGroup fx:id="drawSelectGroup" />
                      </toggleGroup>
                      <opaqueInsets>
                         <Insets right="3.0" />
                      </opaqueInsets></RadioButton>
-                  <RadioButton id="selectRadio" fx:id="selectRadio" mnemonicParsing="false" text="Select" toggleGroup="$drawSelectGroup">
+                  <RadioButton id="selectRadio" fx:id="selectRadio" mnemonicParsing="false" onAction="#selectRadioClicked" text="Select" toggleGroup="$drawSelectGroup">
                      <opaqueInsets>
                         <Insets left="3.0" />
                      </opaqueInsets></RadioButton>

@@ -52,6 +52,20 @@ public class Controller {
         heightField.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter()));
     }
 
+    public void drawRadioClicked() {
+        System.out.println("Draw mode");
+        canvas.setOnMouseClicked( event  -> { int width = Integer.parseInt(widthField.getText());
+        int height = Integer.parseInt(heightField.getText());
+        Shape shape = shapeFactory.getShape((String) shapeChoice.getValue(), canvas.getGraphicsContext2D(),
+                (float)(event.getX() - width * 0.5), (float)(event.getY() - height * 0.5), width, height, colorPicker.getValue());
+        model.getObservableList().add(shape); } );
+    }
+//
+    public void selectRadioClicked() {
+        System.out.println("Select mode");
+        canvas.setOnMouseClicked( event -> System.out.println("Click with select"));
+    }
+
     public void draw() {
         gc.setFill(Color.WHITE);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -62,12 +76,8 @@ public class Controller {
         }
     }
 
-    public void canvasClicked(MouseEvent event) {  //TODO: Change mouse event based on draw or select.
-        int width = Integer.parseInt(widthField.getText());
-        int height = Integer.parseInt(heightField.getText());
-        Shape shape = shapeFactory.getShape((String) shapeChoice.getValue(), canvas.getGraphicsContext2D(),
-                (float)(event.getX() - width * 0.5), (float)(event.getY() - height * 0.5), width, height, colorPicker.getValue());
-        model.getObservableList().add(shape);
+    public void canvasClicked(MouseEvent event) {
+
     }
 
     public void clearCanvasAction(ActionEvent actionEvent) {
