@@ -8,10 +8,10 @@ public class Circle implements Shape {
     double x, y;
     int width, height;
     Color color;
-    GraphicsContext graphicsContext;
+    GraphicsContext gc;
 
-    public Circle(GraphicsContext graphicsContext, double x, double y, int width, int height, Color color) {
-        this.graphicsContext = graphicsContext;
+    public Circle(GraphicsContext gc, double x, double y, int width, int height, Color color) {
+        this.gc = gc;
         this.x = x;
         this.y = y;
         this.width = width;
@@ -21,8 +21,8 @@ public class Circle implements Shape {
 
     @Override
     public void draw() {
-        graphicsContext.setFill(color);
-        graphicsContext.fillOval(x, y, width, height);
+        gc.setFill(color);
+        gc.fillOval(x, y, width, height);
     }
 
 }
