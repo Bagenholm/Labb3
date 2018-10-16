@@ -58,12 +58,22 @@ public class Controller {
         int height = Integer.parseInt(heightField.getText());
         Shape shape = shapeFactory.getShape((String) shapeChoice.getValue(), canvas.getGraphicsContext2D(),
                 (float)(event.getX() - width * 0.5), (float)(event.getY() - height * 0.5), width, height, colorPicker.getValue());
-        model.getObservableList().add(shape); } );
+        model.getObservableList().add(shape);
+        } );
     }
 //
     public void selectRadioClicked() {
         System.out.println("Select mode");
-        canvas.setOnMouseClicked( event -> System.out.println("Click with select"));
+        canvas.setOnMouseClicked( event -> {
+            System.out.println("Click with select");
+            double y = event.getY();
+            double x = event.getX();
+
+            for (Shape shape : model.getObservableList()) {
+                ;
+
+            }
+        });
     }
 
     public void draw() {
