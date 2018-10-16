@@ -9,6 +9,7 @@ public class Circle implements Shape {
     int width, height;
     Color color;
     GraphicsContext gc;
+    boolean selected = false;
 
     public double getX() {
         return x;
@@ -65,6 +66,26 @@ public class Circle implements Shape {
         this.width = width;
         this.height = height;
         this.color = color;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public boolean isInBounds(double xClick, double yClick) {
+        double xMax, yMax;
+        xMax = x + width;
+        yMax = y + height;
+
+        if ( (xClick > x && xClick < xMax) && (yClick > y && yClick < yMax) ) {
+            return true;
+        }
+        return false;
+
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 
     @Override

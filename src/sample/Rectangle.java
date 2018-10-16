@@ -25,5 +25,16 @@ public class Rectangle implements Shape {
         gc.fillRect(x, y, width, height);
     }
 
+    public boolean isInBounds(double xClick, double yClick) {
+        double xMax, yMax;
+        xMax = x + width;
+        yMax = y + height;
+
+        if ( (xClick > x && xClick < xMax) && (yClick > y && yClick < yMax) ) {
+            return true;
+        }
+        return false;
+    }
+
 
 }

@@ -33,6 +33,8 @@ public class Controller {
     TextField widthField;
     @FXML
     TextField heightField;
+    @FXML
+    ChoiceBox shapeList;
 
     GraphicsContext gc;
     ShapeFactory shapeFactory;
@@ -65,13 +67,11 @@ public class Controller {
     public void selectRadioClicked() {
         System.out.println("Select mode");
         canvas.setOnMouseClicked( event -> {
-            System.out.println("Click with select");
-            double y = event.getY();
-            double x = event.getX();
 
             for (Shape shape : model.getObservableList()) {
-                ;
-
+                if (shape.isInBounds(event.getX(), event.getY())) {
+                    System.out.println(shape.getClass().getSimpleName() + " is clicked!");
+                }
             }
         });
     }
