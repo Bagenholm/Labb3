@@ -60,7 +60,8 @@
                 <value>
                     <Color blue="0.0" green="0.0" red="0.0" />
                 </value>
-            </ColorPicker>
+            <
+            /ColorPicker>
             <HBox id="boxWidthHeight" prefHeight="27.0" prefWidth="200.0">
                <children>
                   <TextField id="widthField" fx:id="widthField" promptText="Width" />

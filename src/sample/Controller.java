@@ -93,5 +93,4 @@ public class Controller {
     public void clearCanvasAction(ActionEvent actionEvent) {
         model.getObservableList().clear();
     }
-
 }
