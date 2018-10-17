@@ -9,6 +9,7 @@ public abstract class Shape implements Drawable {
     int width, height;
     Color color;
     GraphicsContext gc;
+    boolean selected;
 
     public Shape (GraphicsContext gc, double x, double y, int width, int height, Color color) {
         this.x = x;
@@ -18,8 +19,6 @@ public abstract class Shape implements Drawable {
         this.width = width;
         this.height = height;
     }
-
-    boolean selected = false;
 
     public boolean isInBounds(double xClick, double yClick) {
         double xMax, yMax;

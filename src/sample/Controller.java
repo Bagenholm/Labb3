@@ -10,6 +10,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.util.converter.IntegerStringConverter;
 
+import javax.swing.*;
+
 public class Controller {
     @FXML
     Button saveButton;
@@ -37,8 +39,8 @@ public class Controller {
     ChoiceBox shapeList;
 
     GraphicsContext gc;
-    ShapeFactory shapeFactory;
     Model model = new Model();
+    Shape tempShape;
 
     public Controller() {
 
@@ -47,39 +49,57 @@ public class Controller {
     public void init() {
         gc = canvas.getGraphicsContext2D();
         model.getObservableList().addListener((ListChangeListener<Shape>) c -> draw());
-        shapeFactory = new ShapeFactory(gc);
         shapeChoice.getItems().addAll("Circle", "Rectangle");
 
         widthField.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter()));
         heightField.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter()));
+
+
     }
 
     public void drawRadioClicked() {
         System.out.println("Draw mode");
+
+        deselectAllShapes();
+        draw();
+
         canvas.setOnMouseClicked( event  -> { int width = Integer.parseInt(widthField.getText());
         int height = Integer.parseInt(heightField.getText());
-        Shape shape = shapeFactory.getShape((String) shapeChoice.getValue(), canvas.getGraphicsContext2D(),
+
+        Shape shape = ShapeFactory.getShape((String) shapeChoice.getValue(), canvas.getGraphicsContext2D(),
                 (float)(event.getX() - width * 0.5), (float)(event.getY() - height * 0.5), width, height, colorPicker.getValue());
         model.getObservableList().add(shape);
         } );
     }
-//
+
     public void selectRadioClicked() {
         System.out.println("Select mode");
         canvas.setOnMouseClicked( event -> {
+            deselectAllShapes();
+            model.getObservableList().stream().filter( shape -> shape.isInBounds(event.getX(), event.getY())).forEach(shape -> { tempShape = shape; } );
+            tempShape.setSelected(true);
 
-            for (Shape shape : model.getObservableList()) {
-                if (shape.isInBounds(event.getX(), event.getY())) {
-                    System.out.println(shape.getClass().getSimpleName() + " is clicked!");
-                }
-            }
+            colorPicker.setOnAction( (ActionEvent e) -> { tempShape.setColor(colorPicker.getValue()); draw(); });
+            widthField.textProperty().addListener( (observable, oldValue, newValue) -> { tempShape.setWidth(Integer.parseInt(newValue));
+                draw(); } );
+            heightField.textProperty().addListener( (observable, oldValue, newValue) -> { tempShape.setHeight(Integer.parseInt(newValue));
+                draw(); } );
+
+            draw();
+
+            widthField.setText(Integer.toString(tempShape.getWidth()));
+            heightField.setText(Integer.toString(tempShape.getHeight()));
+            colorPicker.setValue(tempShape.getColor());
         });
+    }
+
+    public void deselectAllShapes() {
+        model.getObservableList().stream().filter( Shape::isSelected ).forEach(shape -> shape.setSelected(false));
     }
 
     public void draw() {
         gc.setFill(Color.WHITE);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        gc.strokeRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         for (Shape shape: model.getObservableList()) {
             shape.draw();
