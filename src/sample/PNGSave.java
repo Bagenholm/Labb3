@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 
-public class PNGSaveStrategy implements SaveStrategy {
+public class PNGSave implements SaveStrategy {
 
     @Override
     public void save(File file, Canvas canvas, ObservableList<Shape> shapes) {

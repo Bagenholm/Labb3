@@ -10,12 +10,12 @@ import java.io.File;
 
 public class SaveContext {
 
-    PNGSaveStrategy png;
-    SVGSaveStrategy svg;
+    PNGSave png;
+    SVGSave svg;
 
     public void init() {
-        png = new PNGSaveStrategy();
-        svg = new SVGSaveStrategy();
+        png = new PNGSave();
+        svg = new SVGSave();
     }
 
     void save(Canvas canvas, ObservableList<Shape> shapes) {
