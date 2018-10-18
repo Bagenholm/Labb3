@@ -3,14 +3,17 @@ package sample;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.util.converter.IntegerStringConverter;
 
-import javax.swing.*;
+import java.io.File;
 
 public class Controller {
     @FXML
@@ -41,19 +44,19 @@ public class Controller {
     GraphicsContext gc;
     Model model = new Model();
     Shape tempShape;
-
+    SaveContext saveContext = new SaveContext();
     public Controller() {
 
     }
 
     public void init() {
+        saveContext.init();
         gc = canvas.getGraphicsContext2D();
         model.getObservableList().addListener((ListChangeListener<Shape>) c -> draw());
         shapeChoice.getItems().addAll("Circle", "Rectangle");
 
         widthField.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter()));
         heightField.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter()));
-
 
     }
 
@@ -112,5 +115,9 @@ public class Controller {
 
     public void clearCanvasAction(ActionEvent actionEvent) {
         model.getObservableList().clear();
+    }
+
+    public void save() { ;
+        saveContext.save(canvas);
     }
 }

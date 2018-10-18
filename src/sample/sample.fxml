@@ -27,7 +27,7 @@
    <children>
       <HBox prefHeight="67.0" prefWidth="301.0">
          <children>
-          <Button id="saveButton" fx:id="saveButton" mnemonicParsing="false" text="Save" />
+          <Button id="saveButton" fx:id="saveButton" mnemonicParsing="false" onAction="#save" text="Save" />
              <Button id="loadButton" fx:id="loadButton" mnemonicParsing="false" text="Load" />
          </children>
          <padding>
