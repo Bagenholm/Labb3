@@ -1,5 +1,6 @@
 package sample;
 
+
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,7 +10,9 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.util.converter.IntegerStringConverter;
-
+import sample.Shapes.Shape;
+import sample.Shapes.ShapeFactory;
+import sample.Saving.*;
 
 public class Controller {
     @FXML
@@ -102,6 +105,10 @@ public class Controller {
 
     public void canvasClicked(MouseEvent event) {
 
+    }
+
+    public void deleteSelectedShape() {
+        model.getObservableList().remove(tempShape);
     }
 
     public void clearCanvasAction(ActionEvent actionEvent) {

@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import sample.Shapes.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,17 +24,5 @@ public class Model {
 
     public ObservableList<Shape> getObservableList() {
         return observableList;
-    }
-
-    public void setObservableList(ObservableList<Shape> observableList) {
-        this.observableList = observableList;
-    }
-
-    public final String getText() {
-        return text.get();
-    }
-
-    public void setText(String string) {
-        text.setValue(string);
     }
 }

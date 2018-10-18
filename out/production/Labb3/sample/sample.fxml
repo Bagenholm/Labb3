@@ -70,7 +70,7 @@
             <ChoiceBox id="shapeList" fx:id="shapeList" prefWidth="150.0" />
             <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="143.0" spacing="2.0">
                <children>
-                  <Button id="deleteButton" fx:id="deleteButton" mnemonicParsing="false" text="Delete shape" />
+                  <Button id="deleteButton" fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteSelectedShape" text="Delete shape" />
                   <Button id="clearButton" fx:id="clearButton" mnemonicParsing="false" onAction="#clearCanvasAction" text="Clear canvas" />
                </children>
             </HBox>
