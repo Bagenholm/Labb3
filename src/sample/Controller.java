@@ -3,17 +3,13 @@ package sample;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
 import javafx.util.converter.IntegerStringConverter;
 
-import java.io.File;
 
 public class Controller {
     @FXML
@@ -67,11 +63,10 @@ public class Controller {
         draw();
 
         canvas.setOnMouseClicked( event  -> { int width = Integer.parseInt(widthField.getText());
-        int height = Integer.parseInt(heightField.getText());
-
-        Shape shape = ShapeFactory.getShape((String) shapeChoice.getValue(), canvas.getGraphicsContext2D(),
+            int height = Integer.parseInt(heightField.getText());
+            Shape shape = ShapeFactory.getShape((String) shapeChoice.getValue(), canvas.getGraphicsContext2D(),
                 (float)(event.getX() - width * 0.5), (float)(event.getY() - height * 0.5), width, height, colorPicker.getValue());
-        model.getObservableList().add(shape);
+            model.getObservableList().add(shape);
         } );
     }
 
@@ -117,7 +112,7 @@ public class Controller {
         model.getObservableList().clear();
     }
 
-    public void save() { ;
-        saveContext.save(canvas);
+    public void save() {
+        saveContext.save(canvas, model.getObservableList());
     }
 }

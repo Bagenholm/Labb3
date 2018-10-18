@@ -19,4 +19,10 @@ public class Circle extends Shape {
             gc.strokeOval(x, y, width, height);
         }
     }
+
+    @Override
+    public String toString() {
+        return "<ellipse cx=\"" + (x + width*0.5) + "\" cy=\"" + (y + height*0.5) + "\" rx=\"" + width*0.5
+                + "\" ry=\"" + height*0.5 + "\" fill=\"" + toRGBCode(color) + "\" />";
+    }
 }

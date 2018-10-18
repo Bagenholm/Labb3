@@ -19,4 +19,11 @@ public class Rectangle extends Shape {
             gc.strokeRect(x, y, width, height);
         }
     }
+
+
+    @Override
+    public String toString() {
+        return "<rect x=\"" + (x) + "\" y=\"" + (y) +
+                "\" width=\"" + width + "\" height=\"" + height + "\" fill=\"" + toRGBCode(color) + "\" />";
+    }
 }
