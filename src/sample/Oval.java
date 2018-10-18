@@ -3,9 +3,9 @@ package sample;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Circle extends Shape {
+public class Oval extends Shape {
 
-    public Circle(GraphicsContext gc, double x, double y, int width, int height, Color color) {
+    public Oval(GraphicsContext gc, double x, double y, int width, int height, Color color) {
         super(gc, x, y, width, height, color);
     }
 

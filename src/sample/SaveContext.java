@@ -6,8 +6,6 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 
-
-
 public class SaveContext {
 
     PNGSave png;

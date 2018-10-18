@@ -49,7 +49,7 @@ public class Controller {
         saveContext.init();
         gc = canvas.getGraphicsContext2D();
         model.getObservableList().addListener((ListChangeListener<Shape>) c -> draw());
-        shapeChoice.getItems().addAll("Circle", "Rectangle");
+        shapeChoice.getItems().addAll("Oval", "Rectangle");
 
         widthField.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter()));
         heightField.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter()));
@@ -57,11 +57,8 @@ public class Controller {
     }
 
     public void drawRadioClicked() {
-        System.out.println("Draw mode");
-
         deselectAllShapes();
         draw();
-
         canvas.setOnMouseClicked( event  -> { int width = Integer.parseInt(widthField.getText());
             int height = Integer.parseInt(heightField.getText());
             Shape shape = ShapeFactory.getShape((String) shapeChoice.getValue(), canvas.getGraphicsContext2D(),
@@ -71,7 +68,6 @@ public class Controller {
     }
 
     public void selectRadioClicked() {
-        System.out.println("Select mode");
         canvas.setOnMouseClicked( event -> {
             deselectAllShapes();
             model.getObservableList().stream().filter( shape -> shape.isInBounds(event.getX(), event.getY())).forEach(shape -> { tempShape = shape; } );

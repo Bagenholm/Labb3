@@ -13,7 +13,7 @@ public class ShapeFactory {
     public static Shape getShape(String shapeType, GraphicsContext graphicsContext, float x, float y, int width, int height, Color color) {
         if(shapeType.equalsIgnoreCase("CIRCLE")) {
             System.out.println("Making circle");
-            return new Circle(graphicsContext, x, y, width, height, color);
+            return new Oval(graphicsContext, x, y, width, height, color);
         } else if (shapeType.equalsIgnoreCase("RECTANGLE")) {
             return new Rectangle(graphicsContext, x, y, width, height, color);
         }
