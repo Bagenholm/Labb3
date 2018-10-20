@@ -1,8 +1,9 @@
-package sample;
+package sample.Saving;
 
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.scene.canvas.Canvas;
+import sample.Shapes.Shape;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,7 +16,7 @@ public class SVGSave implements SaveStrategy {
     public void save(File file, Canvas canvas, ObservableList<Shape> shapes) {
         Task<Void> task = new Task<Void>() {
             @Override
-            protected Void call() throws Exception {
+            protected Void call() {
                 try {
                     FileWriter fw = new FileWriter(file.getAbsoluteFile());
                     BufferedWriter bw = new BufferedWriter(fw);

@@ -1,4 +1,4 @@
-package sample;
+package sample.Saving;
 
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -6,6 +6,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
+import sample.Shapes.Shape;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -20,7 +21,7 @@ public class PNGSave implements SaveStrategy {
 
         Task<Void> task = new Task<Void>() {
             @Override
-            protected Void call() throws Exception {
+            protected Void call() {
                 if(file != null){
                     try {
                         ImageIO.write(SwingFXUtils.fromFXImage(image,null),"png",file);

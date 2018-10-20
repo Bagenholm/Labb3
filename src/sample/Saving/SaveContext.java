@@ -1,22 +1,23 @@
-package sample;
+package sample.Saving;
 
 import javafx.collections.ObservableList;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.FileChooser;
+import sample.Shapes.Shape;
 
 import java.io.File;
 
 public class SaveContext {
 
-    PNGSave png;
-    SVGSave svg;
+    private PNGSave png;
+    private SVGSave svg;
 
     public void init() {
         png = new PNGSave();
         svg = new SVGSave();
     }
 
-    void save(Canvas canvas, ObservableList<Shape> shapes) {
+    public void save(Canvas canvas, ObservableList<Shape> shapes) {
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG", "*.png"));
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("SVG", "*.svg"));

@@ -28,7 +28,12 @@
       <HBox prefHeight="67.0" prefWidth="301.0">
          <children>
           <Button id="saveButton" fx:id="saveButton" mnemonicParsing="false" onAction="#save" text="Save" />
-             <Button id="loadButton" fx:id="loadButton" mnemonicParsing="false" text="Load" />
+            <Button fx:id="undoButton" mnemonicParsing="false" onAction="#undo" text="&lt;- Undo">
+               <HBox.margin>
+                  <Insets left="30.0" right="3.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="redoButton" mnemonicParsing="false" onAction="#redo" text="Redo -&gt;" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -67,7 +72,6 @@
                   <TextField id="heightField" fx:id="heightField" promptText="Height" />
                </children>
             </HBox>
-            <ChoiceBox id="shapeList" fx:id="shapeList" prefWidth="150.0" />
             <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="143.0" spacing="2.0">
                <children>
                   <Button id="deleteButton" fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteSelectedShape" text="Delete shape" />

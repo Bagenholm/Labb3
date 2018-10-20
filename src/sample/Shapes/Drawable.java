@@ -1,6 +1,6 @@
-package sample;
+package sample.Shapes;
 
-public interface Drawable {
+interface Drawable {
     void draw();
 
     boolean isInBounds(double x, double y);

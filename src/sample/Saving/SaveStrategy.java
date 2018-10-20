@@ -1,10 +1,11 @@
-package sample;
+package sample.Saving;
 
 import javafx.collections.ObservableList;
 import javafx.scene.canvas.Canvas;
+import sample.Shapes.Shape;
 
 import java.io.File;
 
-public interface SaveStrategy {
+interface SaveStrategy {
     void save(File file, Canvas canvas, ObservableList<Shape> shapes);
 }

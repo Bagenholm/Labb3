@@ -13,12 +13,11 @@ import javafx.util.converter.IntegerStringConverter;
 import sample.Shapes.Shape;
 import sample.Shapes.ShapeFactory;
 import sample.Saving.*;
+import sample.UndoRedo.*;
 
 public class Controller {
     @FXML
     Button saveButton;
-    @FXML
-    Button loadButton;
     @FXML
     Canvas canvas;
     @FXML
@@ -38,12 +37,16 @@ public class Controller {
     @FXML
     TextField heightField;
     @FXML
-    ChoiceBox shapeList;
+    Button undoButton;
+    @FXML
+    Button redoButton;
 
-    GraphicsContext gc;
-    Model model = new Model();
-    Shape tempShape;
-    SaveContext saveContext = new SaveContext();
+    private GraphicsContext gc;
+    private Model model = new Model();
+    private Shape tempShape;
+    private SaveContext saveContext = new SaveContext();
+    private CommandManager commands = new CommandManager();
+
     public Controller() {
 
     }
@@ -53,9 +56,21 @@ public class Controller {
         gc = canvas.getGraphicsContext2D();
         model.getObservableList().addListener((ListChangeListener<Shape>) c -> draw());
         shapeChoice.getItems().addAll("Oval", "Rectangle");
+        shapeChoice.setValue("Oval");
 
         widthField.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter()));
         heightField.setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter()));
+
+        colorPicker.setOnAction( (ActionEvent e) -> { if (tempShape != null) { commands.doCommand(new ColorCommand(tempShape, colorPicker.getValue()));
+        draw();} });
+
+        widthField.textProperty().addListener( (observable, oldValue, newValue) -> {
+            if (tempShape != null) { commands.doCommand(new WidthCommand(tempShape, Integer.parseInt(newValue)));
+            draw(); } });
+
+        heightField.textProperty().addListener( (observable, oldValue, newValue) -> {
+            if (tempShape != null) { commands.doCommand(new HeightCommand(tempShape, Integer.parseInt(newValue))); }
+            draw(); } );
 
     }
 
@@ -64,23 +79,21 @@ public class Controller {
         draw();
         canvas.setOnMouseClicked( event  -> { int width = Integer.parseInt(widthField.getText());
             int height = Integer.parseInt(heightField.getText());
+
             Shape shape = ShapeFactory.getShape((String) shapeChoice.getValue(), canvas.getGraphicsContext2D(),
                 (float)(event.getX() - width * 0.5), (float)(event.getY() - height * 0.5), width, height, colorPicker.getValue());
-            model.getObservableList().add(shape);
+
+            commands.doCommand(new NewShapeCommand(model.getObservableList(), shape));
         } );
     }
 
     public void selectRadioClicked() {
         canvas.setOnMouseClicked( event -> {
             deselectAllShapes();
-            model.getObservableList().stream().filter( shape -> shape.isInBounds(event.getX(), event.getY())).forEach(shape -> { tempShape = shape; } );
-            tempShape.setSelected(true);
-
-            colorPicker.setOnAction( (ActionEvent e) -> { tempShape.setColor(colorPicker.getValue()); draw(); });
-            widthField.textProperty().addListener( (observable, oldValue, newValue) -> { tempShape.setWidth(Integer.parseInt(newValue));
-                draw(); } );
-            heightField.textProperty().addListener( (observable, oldValue, newValue) -> { tempShape.setHeight(Integer.parseInt(newValue));
-                draw(); } );
+            model.getObservableList().stream().filter( shape -> shape.isInBounds(event.getX(), event.getY())).forEach(shape -> tempShape = shape);
+            if (tempShape != null) {
+                tempShape.setSelected(true);
+            }
 
             draw();
 
@@ -90,11 +103,12 @@ public class Controller {
         });
     }
 
-    public void deselectAllShapes() {
+    private void deselectAllShapes() {
         model.getObservableList().stream().filter( Shape::isSelected ).forEach(shape -> shape.setSelected(false));
+        tempShape = null;
     }
 
-    public void draw() {
+    private void draw() {
         gc.setFill(Color.WHITE);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
@@ -108,7 +122,7 @@ public class Controller {
     }
 
     public void deleteSelectedShape() {
-        model.getObservableList().remove(tempShape);
+        commands.doCommand(new DeleteShapeCommand(model.getObservableList(), tempShape));
     }
 
     public void clearCanvasAction(ActionEvent actionEvent) {
@@ -117,5 +131,15 @@ public class Controller {
 
     public void save() {
         saveContext.save(canvas, model.getObservableList());
+    }
+
+    public void undo() {
+        commands.undo();
+        draw();
+    }
+
+    public void redo() {
+        commands.redo();
+        draw();
     }
 }

@@ -18,7 +18,7 @@ public class Main extends Application {
         controller = loader.getController();
         controller.init();
 
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Sketch Pad (Freemium Extended Ultra Deluxe Collector's Edition+)");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

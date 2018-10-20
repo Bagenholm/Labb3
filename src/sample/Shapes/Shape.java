@@ -1,4 +1,4 @@
-package sample;
+package sample.Shapes;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -11,7 +11,7 @@ public abstract class Shape implements Drawable {
     GraphicsContext gc;
     boolean selected;
 
-    public Shape (GraphicsContext gc, double x, double y, int width, int height, Color color) {
+    Shape(GraphicsContext gc, double x, double y, int width, int height, Color color) {
         this.x = x;
         this.y = y;
         this.color = color;
@@ -25,13 +25,10 @@ public abstract class Shape implements Drawable {
         xMax = x + width;
         yMax = y + height;
 
-        if ( (xClick > x && xClick < xMax) && (yClick > y && yClick < yMax) ) {
-            return true;
-        }
-        return false;
+        return (xClick > x && xClick < xMax) && (yClick > y && yClick < yMax);
     }
 
-    public String toRGBCode(Color color) {
+    String toRGBCode(Color color) {
         return String.format("#%02X%02X%02X",
                 (int) (color.getRed() * 255),
                 (int) (color.getGreen() * 255),
